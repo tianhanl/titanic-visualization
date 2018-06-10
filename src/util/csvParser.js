@@ -20,7 +20,16 @@ const parseLocalCSV = uri => {
     .then(result => result.data);
 };
 
+const parseLocalCSVSync = uri => {
+  const csvString = fs.readFileSync(uri).toString('utf8');
+  const result = Papa.parse(csvString, {
+    header: true
+  });
+  return result.data;
+};
+
 module.exports = {
   readCSV,
-  parseLocalCSV
+  parseLocalCSV,
+  parseLocalCSVSync
 };
