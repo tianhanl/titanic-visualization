@@ -1,12 +1,14 @@
 import React from 'react';
 import GraphContainer from './GraphContainer';
+import PieGraph from './PieGraph';
+import { titanicData } from '../data/titanicData';
+import { Grid } from '@material-ui/core';
 
 const OriginalDataDisplay = props => {
-  const { data } = props;
   return (
-    <div>
-      {Object.keys(data).map(key => {
-        const currData = data[key];
+    <Grid container wrap="nowrap" spacing={16}>
+      {Object.keys(titanicData).map(key => {
+        const currData = titanicData[key];
         const presentationalData = Object.keys(currData.values).map(
           dataKey => ({
             name: dataKey,
@@ -14,12 +16,18 @@ const OriginalDataDisplay = props => {
           })
         );
         return (
-          <GraphContainer key={key}>
-            <BarGraph data={presentationalData} name="name" key="value" />
-          </GraphContainer>
+          <Grid item key={key}>
+            <GraphContainer width={300} height={300}>
+              <PieGraph
+                data={presentationalData}
+                name={'name'}
+                valueKey={'value'}
+              />
+            </GraphContainer>
+          </Grid>
         );
       })}
-    </div>
+    </Grid>
   );
 };
 
