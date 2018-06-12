@@ -1,5 +1,10 @@
 const Papa = require('papaparse');
 const fs = require('fs');
+
+const defaultConfig = {
+  header: true
+};
+
 const readCSV = uri => {
   return new Promise((resolve, reject) => {
     fs.readFile(uri, (err, data) => {
@@ -10,21 +15,15 @@ const readCSV = uri => {
   });
 };
 
-const parseLocalCSV = uri => {
+const parseLocalCSV = (uri, config = defaultConfig) => {
   return readCSV(uri)
-    .then(csvString =>
-      Papa.parse(csvString, {
-        header: true
-      })
-    )
+    .then(csvString => Papa.parse(csvString, config))
     .then(result => result.data);
 };
 
-const parseLocalCSVSync = uri => {
+const parseLocalCSVSync = (uri, config = defaultConfig) => {
   const csvString = fs.readFileSync(uri).toString('utf8');
-  const result = Papa.parse(csvString, {
-    header: true
-  });
+  const result = Papa.parse(csvString, config);
   return result.data;
 };
 
