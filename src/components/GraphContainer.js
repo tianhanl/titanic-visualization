@@ -1,17 +1,22 @@
 import React from 'react';
-import { Paper, withStyles } from '@material-ui/core';
+import { Paper, withStyles, Typography } from '@material-ui/core';
 import { ResponsiveContainer } from 'recharts';
 
 const styles = {
   graphContainer: {
     overflow: 'hidden',
-    borderRadius: 4
+    padding: '0.5em'
   }
 };
 
 const GraphContainer = props => {
-  const { width, height, children, classes } = props;
-  return <Paper elevation={4}>{children}</Paper>;
+  const { graphName, children, classes } = props;
+  return (
+    <Paper elevation={4} className={classes.graphContainer}>
+      {children}
+      <Typography variant="caption">{graphName}</Typography>
+    </Paper>
+  );
 };
 
 export default withStyles(styles)(GraphContainer);

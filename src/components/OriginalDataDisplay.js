@@ -17,7 +17,7 @@ const OriginalDataDisplay = props => {
         );
         return (
           <Grid item key={key}>
-            <GraphContainer width={300} height={300}>
+            <GraphContainer graphName={key} width={300} height={300}>
               <PieGraph
                 data={presentationalData}
                 name={'name'}
